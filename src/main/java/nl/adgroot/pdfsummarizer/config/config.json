@@ -1,0 +1,18 @@
+{
+  "ollama": {
+    "url": "http://localhost:11434/api/generate",
+    "model": "llama3.1:8b",
+    "temperature": 0.3,
+    "timeoutSeconds": 120
+  },
+  "chunking": {
+    "maxCharsPerChunk": 9000,
+    "minCharsPerChunk": 2000
+  },
+  "cards": {
+    "maxCardsPerChunk": 20
+  },
+  "output": {
+    "maxFilenameLength": 120
+  }
+}
