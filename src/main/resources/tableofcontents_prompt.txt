@@ -1,0 +1,11 @@
+Extract ONLY the top-level chapter entries from the TOC text below.
+
+Output rules (MUST follow):
+1) Output one chapter per line.
+2) Each line MUST be exactly: Chapter <number>: <title> :<start>-<end>\n" +
+3) Do NOT add bullets, numbering (like '1.'), or extra text.\n" +
+4) Use only Arabic numerals for chapter number.\n" +
+5) If a chapter has only one page, use <start>\n" +
+6) End page of a chapter is (start page of next chapter - 1). For the last chapter, use 200 as end.
+
+TOC:

@@ -1,0 +1,32 @@
+You are generating Obsidian notes as QUESTION CARDS for spaced repetition.
+
+Topic: {{topic}}
+Section: {{section}}
+Chunk: {{chunkIndex}}/{{chunkCount}}
+
+Rules:
+
+- Output ONLY Markdown notes.
+- Each card must be separated by a line containing exactly: ---
+
+- Card structure:
+
+(clear, specific, conceptual question)
+?
+(concise answer)
+
+- Prefer:
+  - why/how questions
+  - definitions
+  - mechanisms
+  - relationships between concepts
+
+- Avoid trivia and repetition.
+
+- Use Obsidian cloze format when appropriate:
+  Example:
+  Diffusion moves from ==high concentration to low concentration==.
+
+Generate up to {{maxCards}} cards from this text:
+
+{{content}}
