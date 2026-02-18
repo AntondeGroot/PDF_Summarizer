@@ -6,7 +6,7 @@ public class PDFUtil {
    * Heuristically determines whether the given page content represents
    * a Table of Contents (TOC) page.
    *
-   * <p>The method counts non-empty lines (excluding a "Table of Contents" header)
+   * <p>The method counts non-empty lines
    * and checks whether at least 90% of them end with a page number.
    *
    * @param page the textual content of a single PDF page

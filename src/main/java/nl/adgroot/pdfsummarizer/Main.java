@@ -1,16 +1,14 @@
 package nl.adgroot.pdfsummarizer;
 
 import static nl.adgroot.pdfsummarizer.pdf.PDFUtil.isTableOfContentsPage;
+import static nl.adgroot.pdfsummarizer.text.TableOfContentConverter.convert;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import nl.adgroot.pdfsummarizer.config.AppConfig;
 import nl.adgroot.pdfsummarizer.config.ConfigLoader;
 import nl.adgroot.pdfsummarizer.llm.OllamaClient;
@@ -68,56 +66,12 @@ public class Main {
     for (int i = TOC_begin; i <= TOC_end; i++) {
       TOC.append(pages.get(i));
     }
-    System.out.println("toc = "+TOC);
 
-    String toc = TOC.toString();
-
-    String[] chapters = toc.split("(?=Chapter\\s+\\d+:)");
-    Pattern numberPattern = Pattern.compile("(\\d+)");
-
-    List<Chapter> chapters2 = new ArrayList<>();
-    for (String chapter : chapters) {
-      System.out.println("---- CHAPTER ----");
-
-      String[] lines = chapter.split("\\R");
-
-      if (lines.length == 0) continue;
-
-      String firstLine = lines[0].trim();
-
-      // find first number in first line
-      Matcher firstMatcher = numberPattern.matcher(firstLine);
-      if (!firstMatcher.find()) continue;
-
-      int start = Integer.parseInt(firstMatcher.group(1));
-
-      // find last number in entire chapter (scan backwards)
-      int end = start;
-      for (int i = lines.length - 1; i >= 0; i--) {
-        Matcher lastMatcher = numberPattern.matcher(lines[i]);
-        if (lastMatcher.find()) {
-          end = Integer.parseInt(lastMatcher.group(1));
-          break;
-        }
-      }
-
-      // remove the start number from first line title
-//      String title = firstLine.replaceAll("\\s+\\d+\\s*$", "");
-      String title = firstLine;
-
-      // print desired format
-      System.out.println(title + " :^^" + start + "-" + end);
-    }
-
-    Paths.get(Main.class.getClassLoader().getResource("tableofcontents_prompt.txt").toURI());
-
-    String prompt = Files.readString(Paths.get(Main.class.getClassLoader().getResource("tableofcontents_prompt.txt").toURI()));
-    String s = llm.generate(prompt+TOC);
-    System.out.println(s);
-    System.out.println("found table of contents from: "+TOC_begin+", to : "+TOC_end);
+    List<Chapter> toc = convert(TOC.toString(),150);
+    System.out.println(toc);
 
     PromptTemplate promptTemplate = PromptTemplate.load(Paths.get(Main.class.getClassLoader().getResource("prompt.txt").toURI()));
-    prompt = promptTemplate.render(Map.of(
+    String prompt = promptTemplate.render(Map.of(
         "topic", topic,
         "topicTag", topic.toLowerCase().replace(" ", "-"),
         "section", "test",

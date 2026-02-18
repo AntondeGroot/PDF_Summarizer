@@ -2,19 +2,33 @@ package nl.adgroot.pdfsummarizer.text;
 
 public class Chapter {
   public String title;
-  public String start;
-  public String end;
+  public int start;
+  public int end;
 
-  public void Chapter(String title){
+  public Chapter(String title, int start, int end){
     this.title = title;
-  }
-
-  public void setStart(String start){
     this.start = start;
-  }
-
-  public void setEnd(String end){
     this.end = end;
   }
 
+  public Chapter(String title){
+    this.title = title;
+  }
+
+  @Override
+  public String toString() {
+    return title+": "+start+"-"+end;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof Chapter c)) return false;
+    return start == c.start && end == c.end && java.util.Objects.equals(title, c.title);
+  }
+
+  @Override
+  public int hashCode() {
+    return java.util.Objects.hash(title, start, end);
+  }
 }
