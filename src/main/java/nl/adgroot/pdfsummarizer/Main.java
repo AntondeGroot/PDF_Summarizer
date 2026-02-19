@@ -52,6 +52,8 @@ public class Main {
     // loop over PDF to add context to each page
 
     CardsPage cardsPage;
+    int nrPages = pdfContent.content.size();
+    int pagesIndex = 0;
     for (Chapter chapter : pdfContent.tableOfContent) {
       System.out.println("chapter loop: "+chapter.title);
       cardsPage = new CardsPage();
@@ -78,7 +80,8 @@ public class Main {
         for (Card c : cards) {
           cardsPage.addCard(c.toString());
         }
-        System.out.print("#");
+        pagesIndex++;
+        System.out.printf("%.2f %%\n", ((float) pagesIndex / nrPages) * 100);
       }
       Path outDir = Path.of("/Users/adgroot/Documents");
       writer.writeCard(outDir, cardsPage);

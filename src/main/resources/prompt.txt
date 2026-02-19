@@ -4,23 +4,54 @@ Topic: {{topic}}
 Section: {{section}}
 Chunk: {{chunkIndex}}/{{chunkCount}}
 
-Rules:
-
+STRICT OUTPUT RULES:
 - Output ONLY Markdown notes.
-- Each card must be separated by a line containing exactly: ---
-- Card structure:
+- Do NOT number the cards.
+- Each card MUST follow this EXACT structure:
 
 (clear, specific, conceptual question)
 ?
 (concise answer)
 
-- Prefer:
-  - why/how questions
-  - definitions
-  - mechanisms
-  - relationships between concepts
+- The line containing the single "?" must contain ONLY the character ? and nothing else.
+- Each card MUST be separated by a line containing exactly:
+---
 
-- Avoid trivia and repetition.
+- No extra lines before the first card.
+- No extra lines after the last card.
+- No extra blank lines anywhere except where shown in the structure.
+
+Card format example (follow exactly):
+
+What is diffusion?
+?
+Movement of particles from ==high concentration to low concentration==.
+
+---
+
+CARD SELECTION RULES (CRITICAL):
+
+Only generate cards that meet at least one of these criteria:
+
+- Explains WHY something exists
+- Explains HOW something works
+- Describes a mechanism or internal process
+- Explains trade-offs or design decisions
+- Clarifies relationships between concepts
+- Prevents a common misconception
+- Explains consequences of misuse
+
+DO NOT generate cards about:
+- Version numbers
+- Release dates
+- Minor command flags
+- Exact syntax unless conceptually important
+- Historical trivia
+- Facts that do not improve practical understanding
+
+Before generating a card, ask internally:
+"Would forgetting this meaningfully harm conceptual understanding of the topic?"
+If the answer is NO, do not generate a card about it.
 
 - Use Obsidian cloze format when appropriate:
   Example:
