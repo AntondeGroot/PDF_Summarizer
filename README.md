@@ -5,4 +5,4 @@ You can extract text from a PDF\
 And make Q&A Flashcards for spaced repitition, e.g. notes in Obsidian.\
 And make a summary for each chapter (TBD).
 
-Use `OLLAMA_NUM_PARALLEL=4` beforehand.
+Use 'OLLAMA_NUM_PARALLEL=4' beforehand.
