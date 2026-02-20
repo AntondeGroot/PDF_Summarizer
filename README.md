@@ -7,6 +7,7 @@ And make a summary for each chapter (TBD).
 
 # MacOS Parallellize
 Use 'launchctl setenv OLLAMA_NUM_PARALLEL 4' beforehand.
+launchctl setenv OLLAMA_MAX_LOADED_MODELS 1
 Stopping ollama on MacOS:
 - ps -e | grep ollama (when you see hits continue)
 - kill -9 processNumber
